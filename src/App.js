@@ -2,7 +2,7 @@
 import React, { Component } from 'react'; 
 import './App.css';
 import Navbar from './components/navbar'
-import Counters from './components/counters';
+import Counters from './components/Counters/Counters';
 
 class App extends Component {
   state = {
