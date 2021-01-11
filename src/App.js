@@ -2,7 +2,11 @@
 import React, { Component } from 'react'; 
 import './App.css';
 import Navbar from './components/navbar'
-import Counters from './components/Counters/Counters';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Shop from './components/shop/shop';
+import Home from './components/home/home';
+import About from './components/about/about';
+
 
 class App extends Component {
   state = {
@@ -13,49 +17,29 @@ class App extends Component {
     {id:4, value:0}
 ]  };
 
-handleDelete= (counterId) =>{
-    const counters = this.state.counters.filter(c => c.id !== counterId);
-    this.setState({counters});
-}
 
-handleIncrement= (counter) =>{
-    const counters = [...this.state.counters];
-    const index = counters.indexOf(counter);
-    counters[index] = {...counter};
-    counters[index].value++;
-    this.setState({counters});
-}
-
-handleDecrement= (counter) =>{
-    const counters = [...this.state.counters];
-    const index = counters.indexOf(counter);
-    counters[index] = {...counter};
-    counters[index].value--;
-    this.setState({counters});
-}
-
-handleReset = () =>{
-  const counters = this.state.counters.map(x=> {
-      x.value = 0
-      return x;
-  })
-  this.setState({counters});
-}
 
 render(){
   console.log(this.state.counters.filter(c => c.value > 0))
   return (
-    
-    <React.Fragment>
-      <Navbar totalCounters={this.state.counters.filter(c => c.value > 0).length}/> 
-      <main className="container">
-      <Counters 
-      counters = {this.state.counters}
-      onReset = {this.handleReset}
-      onIncrement={this.handleIncrement} onDelete={this.handleDelete} onDecrement={this.handleDecrement}/>
-      </main>
+    <Router>
+      <div className="App">
+        <Navbar totalCounters={this.state.counters.filter(c => c.value > 0).length}/> 
+        <Switch>
+        <Route path="/about" exact component={About}>
+          <About/>
+        </Route>
+        <Route path="/" exact component={Home}>
+          <Home/>
+        </Route>
+       
+        <Route path="/shop" exact component={Shop}>
+          <Shop/>
+        </Route> 
+        </Switch>
 
-    </React.Fragment>
+      </div>
+    </Router>
   
 );
 }

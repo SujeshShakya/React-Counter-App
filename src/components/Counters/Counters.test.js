@@ -1,6 +1,8 @@
 import {render} from '@testing-library/react';
 import Counters from './Counters';
 
+///to do : implement mock and use event  asdfkjti   `
+
 
 const counters = [
     {id:1, value:4},
